@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=5, user-scalable=yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="theme-color" content="#080808">
+<title>Untuk Kamu ❤️</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=EB+Garamond:ital,wght@0,400;1,400&family=Playfair+Display:ital,wght@0,400;1,300;1,400&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --black: #080808;
+    --dark: #111111;
+    --mid: #2a2a2a;
+    --gray: #666;
+    --light-gray: #999;
+    --white: #f0ece4;
+    --cream: #d8d0c4;
+    --transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'EB Garamond', serif;
+    overflow-x: hidden;
+    cursor: default;
+    -webkit-font-smoothing: antialiased;
+    -webkit-touch-callout: none;
+  }
+
+  /* ── RAIN CANVAS ── */
+  #rain-canvas {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 10;
+    opacity: 0.35;
+  }
+
+  /* ── MUSIC BUTTON ── Hidden */
+  #music-btn {
+    display: none !important;
+  }
+
+  /* ── SECTION BASE ── */
+  section {
+    min-height: 100vh;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  /* ── BG PHOTO LAYER ── */
+  .bg-photo {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    filter: grayscale(100%) brightness(0.35) contrast(1.1);
+    transform: scale(1.05);
+    transition: transform 8s ease;
+  }
+
+  .bg-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg,
+      rgba(0,0,0,0.6) 0%,
+      rgba(0,0,0,0.3) 40%,
+      rgba(0,0,0,0.7) 100%);
+  }
+
+  /* ═══════════════════════════════
+     SECTION 1 — OPENING
+  ════════════════════════════════ */
+  #opening {
+    background: var(--black);
+  }
+
+  #opening .bg-photo {
+    background-image: url('https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=1600&q=80');
+  }
+
+  .opening-content {
+    position: relative;
+    z-index: 20;
+    text-align: center;
+    padding: 2rem;
+    animation: fadeInUp 1.8s ease forwards;
+  }
+  
+  @media (max-width: 768px) {
+    .opening-content { padding: 1.5rem; }
+  }
+  
+  @media (max-width: 480px) {
+    .opening-content { padding: 1rem; }
+  }
+
+  .opening-eyebrow {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(0.75rem, 2vw, 0.9rem);
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--light-gray);
+    margin-bottom: 1.5rem;
+    opacity: 0.7;
+  }
+
+  .opening-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 10vw, 7rem);
+    font-weight: 400;
+    font-style: italic;
+    line-height: 1;
+    color: var(--white);
+    letter-spacing: -0.02em;
+    margin-bottom: 0.3em;
+  }
+
+  .opening-heart {
+    display: block;
+    font-size: clamp(1.2rem, 3vw, 1.8rem);
+    font-style: normal;
+    color: #c8b8a0;
+    margin-top: 0.4em;
+    animation: heartbeat 2s ease-in-out infinite;
+  }
+
+  .opening-divider {
+    width: 60px;
+    height: 1px;
+    background: rgba(255,255,255,0.25);
+    margin: 2rem auto;
+  }
+
+  .opening-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+    font-style: italic;
+    color: var(--light-gray);
+    margin-bottom: 3rem;
+    letter-spacing: 0.05em;
+  }
+
+  .btn-open {
+    display: inline-block;
+    padding: 14px 42px;
+    border: 1px solid rgba(255,255,255,0.3);
+    background: transparent;
+    color: var(--cream);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+    touch-action: manipulation;
+    -webkit-user-select: none;
+  }
+
+  .btn-open::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(255,255,255,0.06);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+  }
+
+  .btn-open:hover { border-color: rgba(255,255,255,0.6); }
+  .btn-open:hover::before { transform: scaleX(1); }
+  .btn-open:active { transform: scale(0.98); }
+  
+  @media (max-width: 768px) {
+    .btn-open {
+      padding: 16px 48px;
+      font-size: 1.1rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .btn-open {
+      padding: 14px 36px;
+      font-size: 0.95rem;
+      letter-spacing: 0.15em;
+    }
+  }
+
+  /* ═══════════════════════════════
+     SECTION 2 — GALLERY
+  ════════════════════════════════ */
+  #gallery {
+    background: var(--black);
+    flex-direction: column;
+    padding: 80px 20px;
+  }
+  
+  @media (max-width: 768px) {
+    #gallery { padding: 60px 16px; }
+  }
+  
+  @media (max-width: 480px) {
+    #gallery { padding: 40px 12px; }
+  }
+
+  #gallery .bg-photo {
+    background-image: url('https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=1600&q=80');
+    opacity: 0.15;
+  }
+
+  .gallery-header {
+    position: relative;
+    z-index: 20;
+    text-align: center;
+    margin-bottom: 50px;
+  }
+  
+  @media (max-width: 768px) {
+    .gallery-header { margin-bottom: 40px; }
+  }
+  
+  @media (max-width: 480px) {
+    .gallery-header { margin-bottom: 30px; }
+  }
+
+  .section-eyebrow {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--gray);
+    margin-bottom: 1rem;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 400;
+    font-style: italic;
+    color: var(--white);
+  }
+
+  /* Slider */
+  .slider-wrap {
+    position: relative;
+    z-index: 20;
+    width: 100%;
+    max-width: 780px;
+    margin: 0 auto;
+  }
+  
+  @media (max-width: 768px) {
+    .slider-wrap { max-width: 100%; padding: 0 8px; }
+  }
+
+  .slider {
+    position: relative;
+    aspect-ratio: 4/3;
+    overflow: hidden;
+    background: var(--dark);
+  }
+
+  .slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 1.2s ease;
+  }
+
+  .slide.active { opacity: 1; }
+
+  .slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(100%) contrast(1.05) brightness(0.8);
+    transform: scale(1.08);
+    transition: transform 8s ease;
+  }
+
+  .slide.active img { transform: scale(1); }
+
+  .slide-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 40%, rgba(0,0,0,0.75) 100%);
+  }
+
+  .slide-caption {
+    position: absolute;
+    bottom: 30px;
+    left: 0; right: 0;
+    text-align: center;
+    padding: 0 40px;
+    z-index: 5;
+  }
+  
+  @media (max-width: 768px) {
+    .slide-caption { bottom: 24px; padding: 0 30px; }
+  }
+  
+  @media (max-width: 480px) {
+    .slide-caption { bottom: 16px; padding: 0 20px; }
+  }
+
+  .slide-caption p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1rem, 2.5vw, 1.3rem);
+    font-style: italic;
+    color: var(--cream);
+    letter-spacing: 0.03em;
+    line-height: 1.5;
+  }
+
+  .slider-counter {
+    position: absolute;
+    top: 18px; right: 20px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.2em;
+    color: rgba(255,255,255,0.5);
+    z-index: 5;
+  }
+
+  .slider-dots {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 24px;
+  }
+  
+  @media (max-width: 480px) {
+    .slider-dots { gap: 8px; margin-top: 18px; }
+  }
+
+  .dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--gray);
+    cursor: pointer;
+    transition: var(--transition);
+    touch-action: manipulation;
+  }
+  .dot.active { background: var(--cream); transform: scale(1.4); }
+  
+  @media (max-width: 480px) {
+    .dot {
+      width: 7px; height: 7px;
+    }
+  }
+
+  .slider-btn {
+    position: absolute;
+    top: 50%; transform: translateY(-50%);
+    background: rgba(0,0,0,0.4);
+    border: 1px solid rgba(255,255,255,0.15);
+    color: var(--cream);
+    width: 44px; height: 44px;
+    cursor: pointer;
+    z-index: 10;
+    display: flex; align-items: center; justify-content: center;
+    transition: var(--transition);
+    font-size: 1.2rem;
+    touch-action: manipulation;
+  }
+  .slider-btn:hover { background: rgba(255,255,255,0.1); }
+  .slider-btn:active { transform: translateY(-50%) scale(0.95); }
+  .slider-btn.prev { left: 8px; }
+  .slider-btn.next { right: 8px; }
+
+  @media (max-width: 768px) {
+    .slider-btn {
+      width: 52px; height: 52px;
+      font-size: 1.4rem;
+    }
+    .slider-btn.prev { left: 4px; }
+    .slider-btn.next { right: 4px; }
+  }
+
+  @media (max-width: 600px) {
+    .slider-btn {
+      width: 48px; height: 48px;
+      font-size: 1.2rem;
+    }
+    .slider-btn.prev { left: 2px; }
+    .slider-btn.next { right: 2px; }
+  }
+  
+  @media (max-width: 480px) {
+    .slider-btn {
+      width: 44px; height: 44px;
+      font-size: 1rem;
+      background: rgba(0,0,0,0.5);
+    }
+    .slider-btn.prev { left: 0; }
+    .slider-btn.next { right: 0; }
+  }
+
+  /* ═══════════════════════════════
+     SECTION 3 — PUISI
+  ════════════════════════════════ */
+  #puisi {
+    background: var(--black);
+    flex-direction: column;
+    padding: 100px 20px;
+  }
+  
+  @media (max-width: 768px) {
+    #puisi { padding: 80px 16px; }
+  }
+  
+  @media (max-width: 480px) {
+    #puisi { padding: 60px 12px; }
+  }
+
+  #puisi .bg-photo {
+    background-image: url('https://images.unsplash.com/photo-1499678329028-101435549a4e?w=1600&q=80');
+    opacity: 0.12;
+  }
+
+  .puisi-content {
+    position: relative;
+    z-index: 20;
+    max-width: 700px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  
+  @media (max-width: 768px) {
+    .puisi-content { max-width: 90vw; }
+  }
+
+  .nama-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3.5rem, 10vw, 6.5rem);
+    font-weight: 400;
+    font-style: italic;
+    color: var(--white);
+    line-height: 1;
+    margin-bottom: 0.2em;
+    letter-spacing: -0.02em;
+    opacity: 0;
+    animation: fadeInUp 1.2s ease 0.2s forwards;
+  }
+
+  .nama-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(0.75rem, 2vw, 0.85rem);
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    color: var(--gray);
+    margin-bottom: 4rem;
+    opacity: 0;
+    animation: fadeInUp 1.2s ease 0.5s forwards;
+  }
+  
+  @media (max-width: 480px) {
+    .nama-sub { margin-bottom: 2rem; }
+  }
+
+  .puisi-lines {
+    list-style: none;
+  }
+
+  .puisi-line {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1rem, 2.8vw, 1.25rem);
+    font-style: italic;
+    color: var(--cream);
+    line-height: 1.9;
+    letter-spacing: 0.02em;
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  .puisi-line.empty { height: 1.2em; }
+  .puisi-line.visible { opacity: 1; transform: translateY(0); }
+
+  .puisi-divider {
+    width: 40px;
+    height: 1px;
+    background: rgba(255,255,255,0.2);
+    margin: 3rem auto;
+  }
+
+  .makna-wrap {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(0.85rem, 2vw, 1rem);
+    color: var(--gray);
+    line-height: 1.8;
+    font-style: italic;
+    letter-spacing: 0.03em;
+    opacity: 0;
+    animation: fadeInUp 1s ease 1s forwards;
+  }
+
+  /* ═══════════════════════════════
+     SECTION 4 — PESAN
+  ════════════════════════════════ */
+  #pesan {
+    background: var(--black);
+    flex-direction: column;
+    padding: 100px 20px;
+  }
+  
+  @media (max-width: 768px) {
+    #pesan { padding: 80px 16px; }
+  }
+  
+  @media (max-width: 480px) {
+    #pesan { padding: 60px 12px; }
+  }
+
+  #pesan .bg-photo {
+    background-image: url('https://images.unsplash.com/photo-1474552226712-ac0f0961a954?w=1600&q=80');
+    opacity: 0.2;
+  }
+
+  .pesan-content {
+    position: relative;
+    z-index: 20;
+    max-width: 680px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  
+  @media (max-width: 768px) {
+    .pesan-content { max-width: 90vw; }
+  }
+
+  .pesan-quote {
+    font-size: clamp(2.5rem, 8vw, 5rem);
+    color: rgba(255,255,255,0.06);
+    font-family: 'Playfair Display', serif;
+    line-height: 1;
+    margin-bottom: -0.3em;
+    display: block;
+  }
+
+  .pesan-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.05rem, 2.5vw, 1.3rem);
+    font-style: italic;
+    color: var(--cream);
+    line-height: 2;
+    letter-spacing: 0.02em;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 1s ease, transform 1s ease;
+  }
+
+  .pesan-text.visible { opacity: 1; transform: translateY(0); }
+
+  /* ═══════════════════════════════
+     SECTION 5 — PENUTUP
+  ════════════════════════════════ */
+  #penutup {
+    background: var(--black);
+    flex-direction: column;
+  }
+
+  #penutup .bg-photo {
+    background-image: url('https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=1600&q=80');
+    opacity: 0.2;
+  }
+
+  .penutup-content {
+    position: relative;
+    z-index: 20;
+    text-align: center;
+    padding: 2rem;
+  }
+  
+  @media (max-width: 768px) {
+    .penutup-content { padding: 1.5rem; }
+  }
+  
+  @media (max-width: 480px) {
+    .penutup-content { padding: 1rem; }
+  }
+
+  .penutup-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.6rem, 5vw, 3.2rem);
+    font-weight: 400;
+    font-style: italic;
+    color: var(--white);
+    line-height: 1.4;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 1.2s ease, transform 1.2s ease;
+  }
+
+  .penutup-title.visible { opacity: 1; transform: translateY(0); }
+
+  .penutup-icon {
+    display: block;
+    font-size: 2rem;
+    margin-top: 1.5rem;
+    opacity: 0;
+    transition: opacity 1.2s ease 0.3s;
+    animation: none;
+  }
+
+  .penutup-icon.visible {
+    opacity: 1;
+    animation: heartbeat 2s ease-in-out infinite;
+  }
+
+  .penutup-small {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--gray);
+    margin-top: 3rem;
+    opacity: 0;
+    transition: opacity 1.2s ease 0.6s;
+  }
+  .penutup-small.visible { opacity: 1; }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    14% { transform: scale(1.12); }
+    28% { transform: scale(1); }
+    42% { transform: scale(1.08); }
+    70% { transform: scale(1); }
+  }
+
+  /* ── SCROLL HIDDEN ── */
+  .fade-target {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.9s ease, transform 0.9s ease;
+  }
+  .fade-target.visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* ── PAGE TRANSITION ── */
+  #page-curtain {
+    position: fixed;
+    inset: 0;
+    background: var(--black);
+    z-index: 9999;
+    pointer-events: none;
+    opacity: 1;
+    transition: opacity 1.2s ease;
+  }
+  #page-curtain.gone { opacity: 0; }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 3px; }
+  ::-webkit-scrollbar-track { background: var(--black); }
+  ::-webkit-scrollbar-thumb { background: var(--gray); }
+
+  /* ─ MOBILE OPTIMIZATIONS ─ */
+  @media (max-width: 768px) {
+    html { 
+      scroll-behavior: auto; 
+      -webkit-text-size-adjust: 100%;
+    }
+    
+    * { -webkit-tap-highlight-color: transparent; }
+    
+    section { 
+      min-height: 100vh; 
+      padding: max(env(safe-area-inset-top), 0) max(env(safe-area-inset-right), 0) max(env(safe-area-inset-bottom), 0) max(env(safe-area-inset-left), 0);
+    }
+  }
+  
+  @supports (padding: max(0px)) {
+    body {
+      padding-left: max(12px, env(safe-area-inset-left));
+      padding-right: max(12px, env(safe-area-inset-right));
+    }
+  }
+</style>
+</head>
+<body>
+
+<div id="page-curtain"></div>
+<canvas id="rain-canvas"></canvas>
+
+<!-- Music Button - Hidden -->
+<!-- button id="music-btn" title="Play/Pause musik" aria-label="Toggle music">
+  <svg id="icon-play" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+  <svg id="icon-pause" viewBox="0 0 24 24" fill="currentColor" style="display:none"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+</button -->
+
+<!-- Hidden audio -->
+<audio id="bg-music" loop autoplay muted>
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<!-- ═══ SECTION 1: OPENING ═══ -->
+<section id="opening">
+  <div class="bg-photo"></div>
+  <div class="bg-overlay"></div>
+  <div class="opening-content">
+    <p class="opening-eyebrow">Sebuah kenangan yang takkan terlupa</p>
+    <h1 class="opening-title">
+      Untuk Kamu
+      <span class="opening-heart">❤</span>
+    </h1>
+    <div class="opening-divider"></div>
+    <p class="opening-sub">Di sini, waktu berhenti sejenak.</p>
+    <button class="btn-open" onclick="openMemories()">Buka Kenangan</button>
+  </div>
+</section>
+
+<!-- ═══ SECTION 2: GALLERY ═══ -->
+<section id="gallery">
+  <div class="bg-photo"></div>
+  <div class="bg-overlay"></div>
+
+  <div class="gallery-header fade-target">
+    <p class="section-eyebrow">Album · Kenangan</p>
+    <h2 class="section-title">Momen yang tersimpan</h2>
+  </div>
+
+  <div class="slider-wrap fade-target">
+    <div class="slider">
+      <!-- Slide 1 -->
+      <div class="slide active">
+        <img src="foto.png" alt="Kenangan 1" loading="lazy">
+        <div class="slide-overlay"></div>
+        <div class="slide-caption">
+          <p>"Hari itu kamu tersenyum,<br>dan duniaku berhenti sejenak."</p>
+        </div>
+        <span class="slider-counter">1 / 5</span>
+      </div>
+      <!-- Slide 2 -->
+      <div class="slide">
+        <img src="foto1.jpg" alt="Kenangan 2" loading="lazy">
+        <div class="slide-overlay"></div>
+        <div class="slide-caption">
+          <p>"Ada jalan panjang yang pernah<br>kita tempuh bersama."</p>
+        </div>
+        <span class="slider-counter">2 / 5</span>
+      </div>
+      <!-- Slide 3 -->
+      <div class="slide">
+        <img src="foto2.jpg" alt="Kenangan 3" loading="lazy">
+        <div class="slide-overlay"></div>
+        <div class="slide-caption">
+          <p>"Satu tatapanmu<br>menyimpan seribu cerita."</p>
+        </div>
+        <span class="slider-counter">3 / 5</span>
+      </div>
+      <!-- Slide 4 -->
+      <div class="slide">
+        <img src="foto3.jpg" alt="Kenangan 4" loading="lazy">
+        <div class="slide-overlay"></div>
+        <div class="slide-caption">
+          <p>"Bahkan diam bersamamu<br>terasa lebih dari cukup."</p>
+        </div>
+        <span class="slider-counter">4 / 5</span>
+      </div>
+      <!-- Slide 5 -->
+      <div class="slide">
+        <img src="foto5.png" alt="Kenangan 5" loading="lazy">
+        <div class="slide-overlay"></div>
+        <div class="slide-caption">
+          <p>"Dan kini semua tinggal kenangan<br>yang terus hidup di dalam dada."</p>
+        </div>
+        <span class="slider-counter">5 / 5</span>
+      </div>
+
+      <button class="slider-btn prev" onclick="changeSlide(-1)">&#8592;</button>
+      <button class="slider-btn next" onclick="changeSlide(1)">&#8594;</button>
+    </div>
+
+    <div class="slider-dots">
+      <div class="dot active" onclick="goToSlide(0)"></div>
+      <div class="dot" onclick="goToSlide(1)"></div>
+      <div class="dot" onclick="goToSlide(2)"></div>
+      <div class="dot" onclick="goToSlide(3)"></div>
+      <div class="dot" onclick="goToSlide(4)"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SECTION 3: PUISI ═══ -->
+<section id="puisi">
+  <div class="bg-photo"></div>
+  <div class="bg-overlay"></div>
+
+  <div class="puisi-content">
+    <h2 class="nama-title">Alya Zahra</h2>
+    <p class="nama-sub">Sebuah nama, sebuah dunia</p>
+
+    <ul class="puisi-lines" id="puisi-lines">
+      <li class="puisi-line">Alya, yang tinggi dalam doa dan harapan,</li>
+      <li class="puisi-line">Zahra, yang bersinar lembut seperti bunga di tengah hujan.</li>
+      <li class="puisi-line empty"></li>
+      <li class="puisi-line">Namamu bukan sekadar rangkaian kata,</li>
+      <li class="puisi-line">tapi cerita tentang indah yang sederhana,</li>
+      <li class="puisi-line">tentang cahaya yang tetap ada</li>
+      <li class="puisi-line">meski langit sedang gelap dan dunia terasa sepi.</li>
+      <li class="puisi-line empty"></li>
+      <li class="puisi-line">Alya Zahra,</li>
+      <li class="puisi-line">seperti hujan yang jatuh tanpa suara,</li>
+      <li class="puisi-line">namun meninggalkan rasa yang tak pernah benar-benar hilang.</li>
+    </ul>
+
+    <div class="puisi-divider"></div>
+
+    <div class="makna-wrap">
+      <p><em>Alya</em> berarti tinggi atau mulia,</p>
+      <p><em>Zahra</em> berarti bunga yang bersinar atau bercahaya.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SECTION 4: PESAN ═══ -->
+<section id="pesan">
+  <div class="bg-photo"></div>
+  <div class="bg-overlay"></div>
+
+  <div class="pesan-content">
+    <span class="pesan-quote">&ldquo;</span>
+    <p class="pesan-text" id="pesan-text">
+      Ada hari-hari yang terasa biasa,<br>
+      tapi bersamamu semua menjadi istimewa.<br><br>
+      Aku ingat tawa kecilmu ketika kamu kira aku tidak melihat,<br>
+      aku ingat cara kamu melihat ke luar jendela<br>
+      seolah ada dunia lain di balik hujan itu.<br><br>
+      Terima kasih sudah pernah ada,<br>
+      terima kasih sudah membiarkanku mengenalmu,<br>
+      dan terima kasih untuk setiap kenangan<br>
+      yang kini menjadi rumah di dalam hatiku.
+    </p>
+  </div>
+</section>
+
+<!-- ═══ SECTION 5: PENUTUP ═══ -->
+<section id="penutup">
+  <div class="bg-photo"></div>
+  <div class="bg-overlay"></div>
+
+  <div class="penutup-content">
+    <h2 class="penutup-title" id="penutup-title">
+      Terima kasih untuk semua kenangan
+    </h2>
+    <span class="penutup-icon" id="penutup-icon">🤍</span>
+    <p class="penutup-small" id="penutup-small">Selalu & Selamanya</p>
+  </div>
+</section>
+
+<script>
+  // ── PAGE LOAD ──
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      document.getElementById('page-curtain').classList.add('gone');
+    }, 300);
+  });
+
+  // ── RAIN ──
+  const canvas = document.getElementById('rain-canvas');
+  const ctx = canvas.getContext('2d');
+  let drops = [];
+
+  function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    initDrops();
+  }
+
+  function initDrops() {
+    drops = [];
+    const baseCount = Math.floor(canvas.width / 6);
+    const isMobile = window.innerWidth <= 768;
+    const count = isMobile ? baseCount * 0.6 : baseCount;
+    for (let i = 0; i < count; i++) {
+      drops.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        len: Math.random() * 22 + 8,
+        speed: Math.random() * 3 + 2,
+        opacity: Math.random() * 0.4 + 0.1,
+        width: Math.random() * 0.6 + 0.2
+      });
+    }
+  }
+
+  function drawRain() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    for (const d of drops) {
+      ctx.beginPath();
+      ctx.moveTo(d.x, d.y);
+      ctx.lineTo(d.x - d.len * 0.18, d.y + d.len);
+      ctx.strokeStyle = `rgba(180,190,200,${d.opacity})`;
+      ctx.lineWidth = d.width;
+      ctx.stroke();
+
+      d.y += d.speed;
+      d.x -= d.speed * 0.18;
+
+      if (d.y > canvas.height) {
+        d.y = -d.len;
+        d.x = Math.random() * canvas.width;
+      }
+    }
+    requestAnimationFrame(drawRain);
+  }
+
+  window.addEventListener('resize', resizeCanvas);
+  resizeCanvas();
+  drawRain();
+
+  // ── MUSIC ──
+  const audio = document.getElementById('bg-music');
+  audio.volume = 0.28;
+
+  // Unmute dan play saat user interaction
+  function startMusic() {
+    audio.muted = false;
+    audio.play().then(() => {
+      console.log('Music started');
+    }).catch((error) => {
+      console.log('Music play failed:', error);
+    });
+    document.removeEventListener('click', startMusic);
+    document.removeEventListener('touchstart', startMusic);
+  }
+
+  // Start music on first user interaction
+  document.addEventListener('click', startMusic, { once: true });
+  document.addEventListener('touchstart', startMusic, { once: true });
+
+  // Try autoplay after page load
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      audio.muted = false;
+      audio.play().catch(() => {});
+    }, 1000);
+  });
+
+  function openMemories() {
+    // Musik sudah otomatis dimulai
+    // Scroll to gallery
+    document.getElementById('gallery').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  // ── SLIDER ──
+  let currentSlide = 0;
+  const slides = document.querySelectorAll('.slide');
+  const dots = document.querySelectorAll('.dot');
+  let autoTimer;
+
+  function goToSlide(n) {
+    slides[currentSlide].classList.remove('active');
+    dots[currentSlide].classList.remove('active');
+    currentSlide = (n + slides.length) % slides.length;
+    slides[currentSlide].classList.add('active');
+    dots[currentSlide].classList.add('active');
+    resetAuto();
+  }
+
+  function changeSlide(dir) {
+    goToSlide(currentSlide + dir);
+  }
+
+  function resetAuto() {
+    clearInterval(autoTimer);
+    autoTimer = setInterval(() => changeSlide(1), 5000);
+  }
+
+  resetAuto();
+
+  // ── SCROLL ANIMATIONS ──
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('.fade-target, #pesan-text, #penutup-title, #penutup-icon, #penutup-small').forEach(el => {
+    observer.observe(el);
+  });
+
+  // Puisi line-by-line reveal
+  const puisiObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const lines = entry.target.querySelectorAll('.puisi-line');
+        lines.forEach((line, i) => {
+          setTimeout(() => line.classList.add('visible'), i * 220);
+        });
+        puisiObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  const puisiSection = document.getElementById('puisi-lines');
+  if (puisiSection) puisiObserver.observe(puisiSection);
+</script>
+</body>
+</html>
